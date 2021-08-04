@@ -1,0 +1,6 @@
+#.*#
+*#*#
+*.#*
+flycheck_*.el
+flycheck_*.elc
+flycheck_*
