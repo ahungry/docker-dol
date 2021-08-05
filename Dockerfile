@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     sqlite3 \
     mariadb-server \
     mariadb-client \
-    mono-runtime \
+    mono-complete \
     wget
 
 # Grab the db files

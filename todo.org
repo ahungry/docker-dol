@@ -1,0 +1,11 @@
+* Fix error on server start up
+[02:08:16,357] FindObjectByKey: DataObject Type (DOL.Database.ItemTemplate) not registered !
+[02:08:16,357] Failed to start the server
+DOL.Database.DatabaseException: Table DOL.Database.ItemTemplate is not registered for Database Connection...
+  at DOL.Database.ObjectDatabase.FindObjectsByKey[TObject] (System.Collections.Generic.IEnumerable`1[T] keys) [0x00076] in <b88cae9ade0142ef8f912c2aacf4a9ed>:0
+  at DOL.Database.ObjectDatabase.FindObjectByKey[TObject] (System.Object key) [0x00001] in <b88cae9ade0142ef8f912c2aacf4a9ed>:0
+  at DOL.GS.Housing.HouseTemplateMgr.CheckItemTemplate (System.String name, System.String id, System.Int32 model, System.Int32 objtype, System.Int32 copper, System.Int32 dps, System.Int32 spd, System.Int32 bonus, System.Int32 weight, System.Int32 realm) [0x00006] in <30f8c0f296784d47b6859e64e00a91bf>:0
+  at DOL.GS.Housing.HouseTemplateMgr.CheckItemTemplates () [0x00012] in <30f8c0f296784d47b6859e64e00a91bf>:0
+  at DOL.GS.Housing.HouseTemplateMgr.Initialize () [0x00001] in <30f8c0f296784d47b6859e64e00a91bf>:0
+  at DOL.GS.Housing.HouseMgr.Start (DOL.GS.GameClient client) [0x00007] in <30f8c0f296784d47b6859e64e00a91bf>:0
+  at DOL.GS.GameServer.Start () [0x002e4] in <30f8c0f296784d47b6859e64e00a91bf>:0
