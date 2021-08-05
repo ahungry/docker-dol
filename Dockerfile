@@ -22,6 +22,9 @@ WORKDIR /app
 ARG DB_NAME="Database DoL 1.9.6r3061"
 ARG BIN_NAME="DOLServer_linux_net45_Debug"
 
+#
+# RUN wget https://github.com/Dawn-of-Light/DOLSharp/releases/download/1.9.7.3814/DOLServer_linux_net45_Debug.zip
+
 COPY ./releases/${DB_NAME}.7z /app/
 COPY ./releases/${BIN_NAME}.zip /app/
 
