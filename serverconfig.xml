@@ -21,7 +21,7 @@
     <GMActionLoggerName>gmactions</GMActionLoggerName>
     <InvalidNamesFile>./config/invalidnames.txt</InvalidNamesFile>
     <DBType>SQLITE</DBType>
-    <DBConnectionString>Data Source=./dol.db</DBConnectionString>
+    <DBConnectionString>Data Source=./data/dol.db</DBConnectionString>
     <DBAutosave>True</DBAutosave>
     <DBAutosaveInterval>10</DBAutosaveInterval>
     <CpuUse>8</CpuUse>

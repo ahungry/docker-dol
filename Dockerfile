@@ -60,8 +60,10 @@ RUN ./mysql2sqlite/mysql2sqlite dol-dump.sql > dol.sqlite3
 RUN cat dol.sqlite3 | sqlite3 dol.db
 
 COPY ./serverconfig.xml /app/config/serverconfig.xml
+COPY ./boot.sh /app/
 
 # Launch the game server
-CMD LANG=en_US.CP1252 mono --debug --gc=sgen --server DOLServer.exe
+CMD /app/boot.sh
+#CMD LANG=en_US.CP1252 mono --debug --gc=sgen --server DOLServer.exe
 
 #CMD bash
