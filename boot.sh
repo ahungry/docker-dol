@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo Time to boot server, copying database into data/
-cp /app/dol.db /app/data/dol.db
+[ -f /app/data/dol.db ] || cp /app/dol.db /app/data/dol.db
 ls  -l /app/data
 sleep 5
 
