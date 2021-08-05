@@ -58,6 +58,6 @@ RUN cat dol.sqlite3 | sqlite3 dol.db
 COPY ./serverconfig.xml /app/config/serverconfig.xml
 
 # Launch the game server
-# RUN LANG=en_US.CP1252 mono --debug --gc=sgen --server DOLServer.exe
+CMD LANG=en_US.CP1252 mono --debug --gc=sgen --server DOLServer.exe
 
-CMD bash
+#CMD bash
