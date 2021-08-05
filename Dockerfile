@@ -32,6 +32,7 @@ RUN unzip "${BIN_NAME}.zip"
 # handles case sensitivity issues.
 # WOW!  This is 600 MB - definitely will want to snapshot/cache this in the real release
 RUN git clone https://github.com/ahungry/db-public.git
+RUN cp db-public/src/scripts/config/config.example.yml db-public/src/scripts/config/config.yml
 RUN cd db-public/src/scripts/bin/linux && ./concat
 RUN mv db-public/src/scripts/bin/linux/db-public.sql DOL-DB-3061.sql
 
