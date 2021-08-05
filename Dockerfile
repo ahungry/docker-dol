@@ -19,16 +19,17 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 
 WORKDIR /app
 
-ARG DB_NAME="Database DoL 1.9.6r3061"
+# # Method to work with local files
+# ARG DB_NAME="Database DoL 1.9.6r3061"
 ARG BIN_NAME="DOLServer_linux_net45_Debug"
 
-#
-# RUN wget https://github.com/Dawn-of-Light/DOLSharp/releases/download/1.9.7.3814/DOLServer_linux_net45_Debug.zip
+# COPY ./releases/${DB_NAME}.7z /app/
+# COPY ./releases/${BIN_NAME}.zip /app/
 
-COPY ./releases/${DB_NAME}.7z /app/
-COPY ./releases/${BIN_NAME}.zip /app/
+# Dynamically get files at boot time.
+RUN wget https://github.com/ahungry/docker-dol/releases/download/0.0.1/DOLServer_linux_net45_Debug.zip
 
-RUN p7zip -d "${DB_NAME}.7z"
+# RUN p7zip -d "${DB_NAME}.7z"
 RUN unzip "${BIN_NAME}.zip"
 
 # This one seems better than the db shipped in the snapshotted release db name

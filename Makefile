@@ -4,4 +4,4 @@ build:
 	docker build -t my-dol-server .
 
 run: build
-	docker run --rm -it --net=host my-dol-server:latest
+	docker run --rm -it -v data:/app/data --net=host my-dol-server:latest

@@ -2,13 +2,7 @@
 
 Dockerized version of the DOLSharp project.
 
-Step one -  clone this repo.
-
-Step two - download
-https://github.com/Dawn-of-Light/DOLSharp/releases/download/1.9.7.3814/DOLServer_linux_net45_Debug.zip
-and save into the releases directory.
-
-Step three - type:
+Just clone this repo and type:
 
 ```
 make
