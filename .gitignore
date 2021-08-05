@@ -5,3 +5,4 @@ flycheck_*.el
 flycheck_*.elc
 flycheck_*
 /releases/
+/data/
