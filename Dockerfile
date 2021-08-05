@@ -11,6 +11,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     sqlite3 \
     mariadb-server \
     mariadb-client \
+    mono-runtime \
     wget
 
 # Grab the db files
@@ -28,10 +29,14 @@ RUN p7zip -d "${DB_NAME}.7z"
 RUN unzip "${BIN_NAME}.zip"
 
 # Need to boot server
-RUN /etc/init.d/mysql start
-RUN echo create database dol | mysql
-RUN cat DOL-DB-3061.sql | mysql -b dol
-RUN mysqldump --skip-extended-insert --compact dol > dol-dump.sql
+COPY ./mysql-to-dump.sh /app/
+
+RUN /app/mysql-to-dump.sh
+
+# RUN /etc/init.d/mysql start
+# RUN echo create database dol | mysql
+# RUN cat DOL-DB-3061.sql | mysql -b dol
+# RUN mysqldump --skip-extended-insert --compact dol > dol-dump.sql
 
 RUN git clone https://github.com/ahungry/mysql2sqlite
 
@@ -42,5 +47,9 @@ RUN git clone https://github.com/ahungry/mysql2sqlite
 RUN ./mysql2sqlite/mysql2sqlite dol-dump.sql > dol.sqlite3
 RUN cat dol.sqlite3 | sqlite3 dol.db
 
+COPY ./serverconfig.xml /app/config/serverconfig.xml
+
+# Launch the game server
+# RUN LANG=en_US.CP1252 mono --debug --gc=sgen --server DOLServer.exe
 
 CMD bash
