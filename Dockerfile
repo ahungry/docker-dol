@@ -9,6 +9,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     p7zip \
     git \
     sqlite3 \
+    mariadb-server \
+    mariadb-client \
     wget
 
 # Grab the db files
@@ -16,17 +18,29 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 
 WORKDIR /app
 
-ARG DB_NAME="Database DoL 1.9.6r3061.7z"
-ARG BIN_NAME="DOLServer_linux_net45_Debug.zip"
+ARG DB_NAME="Database DoL 1.9.6r3061"
+ARG BIN_NAME="DOLServer_linux_net45_Debug"
 
-COPY ./releases/${DB_NAME} /app/
-COPY ./releases/${BIN_NAME} /app/
+COPY ./releases/${DB_NAME}.7z /app/
+COPY ./releases/${BIN_NAME}.zip /app/
 
-RUN p7zip -d "${DB_NAME}"
-RUN unzip "${BIN_NAME}"
+RUN p7zip -d "${DB_NAME}.7z"
+RUN unzip "${BIN_NAME}.zip"
+
+# Need to boot server
+RUN /etc/init.d/mysql start
+RUN echo create database dol | mysql
+RUN cat DOL-DB-3061.sql | mysql -b dol
+RUN mysqldump --skip-extended-insert --compact dol > dol-dump.sql
 
 RUN git clone https://github.com/ahungry/mysql2sqlite
-RUN ./mysql2sqlite/mysql2sqlite "${DB_NAME}" > dol.sqlite
+
+# This is a hardcoded name in the 7z file
+
+# Ideally, we would translate this from mysql on the fly to ensure
+# it's always the most up to date, but we could just use sqlite dump.
+RUN ./mysql2sqlite/mysql2sqlite dol-dump.sql > dol.sqlite3
 RUN cat dol.sqlite3 | sqlite3 dol.db
+
 
 CMD bash
