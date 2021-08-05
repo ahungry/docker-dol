@@ -28,6 +28,13 @@ COPY ./releases/${BIN_NAME}.zip /app/
 RUN p7zip -d "${DB_NAME}.7z"
 RUN unzip "${BIN_NAME}.zip"
 
+# This one seems better than the db shipped in the snapshotted release db name
+# handles case sensitivity issues.
+# WOW!  This is 600 MB - definitely will want to snapshot/cache this in the real release
+RUN git clone https://github.com/ahungry/db-public.git
+RUN cd db-public/src/scripts/bin/linux && ./concat
+RUN mv db-public/src/scripts/bin/linux/db-public.sql DOL-DB-3061.sql
+
 # Need to boot server
 COPY ./mysql-to-dump.sh /app/
 
