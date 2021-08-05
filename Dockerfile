@@ -34,7 +34,7 @@ RUN unzip "${BIN_NAME}.zip"
 RUN git clone https://github.com/ahungry/db-public.git
 RUN cp db-public/src/scripts/config/config.example.yml db-public/src/scripts/config/config.yml
 RUN cd db-public/src/scripts/bin/linux && ./concat
-RUN mv db-public/src/scripts/bin/linux/db-public.sql DOL-DB-3061.sql
+RUN mv db-public/src/scripts/bin/linux/public-db.sql DOL-DB-3061.sql
 
 # Need to boot server
 COPY ./mysql-to-dump.sh /app/
